@@ -184,7 +184,7 @@ export const FOOTER_CONTENT = {
   statusValue: "Optimal",
   statusLatency: "Transmission latency: 24ms",
   statusCount: "Active Progeny: 1,248",
-  copyright: "© 2026  HABESHAPROGENY. ALL RIGHTS RESERVED.",
+  copyright: "© 2026 HABESHAPROGENY. ALL RIGHTS RESERVED.",
   scrollToTop: "TRANSMIT TO TOP",
   navLinks: [
     { name: "Scrollytelling", href: "#" },
