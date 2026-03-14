@@ -54,7 +54,7 @@ export default function BlogSection() {
   return (
     <section className="relative w-full py-24 md:py-32 bg-black overflow-hidden px-6">
       {/* Decorative Blur Elements */}
-      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#00E5FF]/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
+      <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-[#57ff8f]/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
       <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-[#005f73]/5 rounded-full blur-[100px] -translate-y-1/2 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto relative z-10">
@@ -64,7 +64,7 @@ export default function BlogSection() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="text-[#00E5FF] font-outfit font-bold uppercase tracking-widest text-sm mb-4 block"
+              className="text-[#57ff8f] font-outfit font-bold uppercase tracking-widest text-sm mb-4 block"
             >
               The Progeny Journal
             </motion.span>
@@ -78,14 +78,14 @@ export default function BlogSection() {
               Insights & <span className="text-gray-500 italic">Innovations.</span>
             </motion.h2>
           </div>
-          
+
           <motion.button
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group flex items-center gap-3 text-white font-bold tracking-widest text-sm border-b border-white/20 pb-2 transition-all hover:border-[#00E5FF] hover:text-[#00E5FF]"
+            className="group flex items-center gap-3 text-white font-bold tracking-widest text-sm border-b border-white/20 pb-2 transition-all hover:border-[#57ff8f] hover:text-[#57ff8f]"
           >
             VIEW ALL PERSPECTIVES
             <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -103,10 +103,10 @@ export default function BlogSection() {
             <motion.div
               key={post.id}
               variants={cardVariants}
-              className="group relative h-full flex flex-col p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-sm transition-all duration-500 hover:bg-white/[0.07] hover:border-[#00E5FF]/30"
+              className="group relative h-full flex flex-col p-8 rounded-3xl bg-white/[0.03] border border-white/10 backdrop-blur-sm transition-all duration-500 hover:bg-white/[0.07] hover:border-[#57ff8f]/30"
             >
               <div className="flex justify-between items-start mb-12">
-                <span className="text-[10px] font-bold uppercase tracking-tighter px-3 py-1 rounded-full bg-[#00E5FF]/10 text-[#00E5FF] border border-[#00E5FF]/20">
+                <span className="text-[10px] font-bold uppercase tracking-tighter px-3 py-1 rounded-full bg-[#57ff8f]/10 text-[#57ff8f] border border-[#57ff8f]/20">
                   {post.category}
                 </span>
                 <span className="text-[10px] font-medium text-gray-500 uppercase tracking-widest">
@@ -115,7 +115,7 @@ export default function BlogSection() {
               </div>
 
               <div className="flex-grow">
-                <h3 className="font-outfit text-2xl font-bold text-white mb-4 group-hover:text-[#00E5FF] transition-colors duration-300 leading-tight">
+                <h3 className="font-outfit text-2xl font-bold text-white mb-4 group-hover:text-[#57ff8f] transition-colors duration-300 leading-tight">
                   {post.title}
                 </h3>
                 <p className="font-outfit text-gray-400 text-sm leading-relaxed line-clamp-3 mb-8">
@@ -127,13 +127,13 @@ export default function BlogSection() {
                 <span className="text-xs font-bold text-white tracking-widest group-hover:translate-x-2 transition-transform duration-300">
                   READ ARTICLE
                 </span>
-                <motion.div 
-                   className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-[#00E5FF] group-hover:border-[#00E5FF] group-hover:text-[#001827] transition-all duration-300"
+                <motion.div
+                  className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-[#57ff8f] group-hover:border-[#57ff8f] group-hover:text-[#001827] transition-all duration-300"
                 >
                   <ArrowUpRight className="w-4 h-4" />
                 </motion.div>
               </div>
-              
+
               {/* Subtle hover glow effect */}
               <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none shadow-[0_0_40px_rgba(0,229,255,0.05)]" />
             </motion.div>

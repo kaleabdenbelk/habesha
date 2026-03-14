@@ -43,11 +43,11 @@ export default function HeroCanvas({ scrollYProgress }: HeroCanvasProps) {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
-    
+
     // Scale for high DPR displays
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
-    
+
     if (canvas.width !== rect.width * dpr || canvas.height !== rect.height * dpr) {
       canvas.width = rect.width * dpr;
       canvas.height = rect.height * dpr;
@@ -107,7 +107,7 @@ export default function HeroCanvas({ scrollYProgress }: HeroCanvasProps) {
       {/* Fallback pattern/gradient while loading to prevent empty block */}
       {imagesLoaded === 0 && (
         <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-[#001827] to-[#005f73]">
-           <div className="w-12 h-12 border-4 border-[#00E5FF] border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-12 h-12 border-4 border-[#57ff8f] border-t-transparent rounded-full animate-spin"></div>
         </div>
       )}
       {/* Subtle overlay to guarantee text legibility */}

@@ -30,7 +30,7 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-          
+
           {/* Column 1: Brand */}
           <div className="space-y-6">
             <div className="flex w-fit items-center">
@@ -44,10 +44,10 @@ export default function Footer() {
               {footerLinks.socials.map((social) => {
                 const Icon = social.icon;
                 return (
-                  <a 
-                    key={social.name} 
+                  <a
+                    key={social.name}
                     href={social.href}
-                    className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#00E5FF] hover:border-[#00E5FF] hover:bg-[#00E5FF]/5 transition-all"
+                    className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#57ff8f] hover:border-[#57ff8f] hover:bg-[#57ff8f]/5 transition-all"
                   >
                     <Icon className="w-4 h-4" />
                   </a>
@@ -85,23 +85,23 @@ export default function Footer() {
             <h4 className="font-outfit text-sm font-bold uppercase tracking-widest text-white mb-6">{FOOTER_CONTENT.statusTitle}</h4>
             <div className="flex flex-col gap-4">
               <div className="p-4 rounded-2xl bg-white/5 border border-white/5 space-y-2">
-                <div className="flex items-center justify-between text-[10px] font-bold tracking-widest text-[#00E5FF] uppercase">
+                <div className="flex items-center justify-between text-[10px] font-bold tracking-widest text-[#57ff8f] uppercase">
                   <span>{FOOTER_CONTENT.statusLabel}</span>
                   <span className="flex items-center gap-2">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#00E5FF] animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#57ff8f] animate-pulse" />
                     {FOOTER_CONTENT.statusValue}
                   </span>
                 </div>
                 <div className="h-1 w-full bg-white/5 rounded-full overflow-hidden">
-                  <motion.div 
+                  <motion.div
                     initial={{ width: 0 }}
                     whileInView={{ width: "88%" }}
-                    className="h-full bg-[#00E5FF]"
+                    className="h-full bg-[#57ff8f]"
                   />
                 </div>
               </div>
               <p className="text-[10px] text-gray-500 font-medium tracking-wide uppercase leading-relaxed">
-                {FOOTER_CONTENT.statusLatency}<br/>
+                {FOOTER_CONTENT.statusLatency}<br />
                 {FOOTER_CONTENT.statusCount}
               </p>
             </div>
@@ -113,13 +113,13 @@ export default function Footer() {
           <div className="text-[10px] font-bold text-gray-600 tracking-widest uppercase">
             {FOOTER_CONTENT.copyright}
           </div>
-          
-          <button 
+
+          <button
             onClick={scrollToTop}
-            className="group flex items-center gap-3 text-[10px] font-bold text-white tracking-widest uppercase hover:text-[#00E5FF] transition-colors"
+            className="group flex items-center gap-3 text-[10px] font-bold text-white tracking-widest uppercase hover:text-[#57ff8f] transition-colors"
           >
             {FOOTER_CONTENT.scrollToTop}
-            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#00E5FF] transition-all">
+            <div className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#57ff8f] transition-all">
               <ArrowUp className="w-3 h-3 group-hover:-translate-y-1 transition-transform" />
             </div>
           </button>

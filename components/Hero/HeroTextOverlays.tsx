@@ -2,6 +2,7 @@
 
 import { motion, MotionValue, useTransform } from "framer-motion";
 import { HERO_CONTENT } from "@/constants";
+import Link from "next/link";
 
 interface HeroTextOverlaysProps {
   scrollYProgress: MotionValue<number>;
@@ -34,15 +35,15 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
   return (
     <div className="absolute inset-0 pointer-events-none w-full h-full z-10">
       <div className="sticky top-0 w-full h-screen overflow-hidden p-6 md:p-12 lg:p-24 flex flex-col justify-between">
-        
+
         {/* TOP ROW */}
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mt-24">
-          
+
           {/* Top Left: Headline */}
           <motion.div style={{ opacity: opacityTL, y: yTL }} className="pointer-events-auto max-w-xl md:max-w-2xl absolute top-24 left-6 md:left-12 lg:left-24">
             <h1 className="font-outfit text-5xl md:text-7xl font-extrabold leading-tight tracking-tight text-white drop-shadow-2xl">
               {HERO_CONTENT.brand.first}<br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5FF]">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#57ff8f]">
                 {HERO_CONTENT.brand.tagline}
               </span>
             </h1>
@@ -51,9 +52,9 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
           {/* Top Right: Subheadline */}
           <motion.div style={{ opacity: opacityTR, y: yTR }} className="pointer-events-auto max-w-sm md:text-right absolute top-24 right-6 md:right-12 lg:right-24">
             <h2 className="font-outfit text-xl md:text-2xl font-semibold text-gray-200 drop-shadow-xl leading-relaxed">
-              {HERO_CONTENT.subheadline.sectors}<br/>
-              <span className="text-[#00E5FF]">·</span> {HERO_CONTENT.subheadline.experience}<br/>
-              <span className="text-[#00E5FF]">·</span> {HERO_CONTENT.subheadline.impact}
+              {HERO_CONTENT.subheadline.sectors}<br />
+              <span className="text-[#57ff8f]">·</span> {HERO_CONTENT.subheadline.experience}<br />
+              <span className="text-[#57ff8f]">·</span> {HERO_CONTENT.subheadline.impact}
             </h2>
           </motion.div>
 
@@ -61,7 +62,7 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
 
         {/* MIDDLE ROW: About Us */}
         <div className="absolute inset-0 flex items-center justify-center p-6 md:p-12">
-           <motion.div id="about" style={{ opacity: opacityAbout, y: yAbout }} className="pointer-events-auto max-w-3xl text-center">
+          <motion.div id="about" style={{ opacity: opacityAbout, y: yAbout }} className="pointer-events-auto max-w-3xl text-center">
             <h3 className="font-outfit text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl">
               {HERO_CONTENT.about.title}
             </h3>
@@ -73,7 +74,7 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
 
         {/* BOTTOM ROW */}
         <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-8 md:mb-12 absolute bottom-12 left-6 right-6 md:left-12 md:right-12 lg:left-24 lg:right-24">
-          
+
           {/* Bottom Left: Microcopy */}
           <motion.div style={{ opacity: opacityBL, x: xBL }} className="pointer-events-auto max-w-md">
             <p className="font-outfit text-lg md:text-xl text-gray-300 font-medium drop-shadow-lg leading-snug">
@@ -83,13 +84,13 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
 
           {/* Bottom Right: Primary CTA */}
           <motion.div style={{ opacity: opacityBR, scale: scaleBR }} className="pointer-events-auto flex justify-end ml-auto">
-            <a 
-              href="#about"
-              className="group relative inline-flex items-center justify-center px-8 py-4 text-base md:text-lg font-bold text-[#001827] bg-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.8)] rounded-none overflow-hidden transition-all duration-300 ease-out"
+            <Link
+              href="/join"
+              className="group relative inline-flex items-center justify-center px-8 py-4 text-base md:text-lg font-bold text-[#001827] bg-[#57ff8f] shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.8)] rounded-none overflow-hidden transition-all duration-300 ease-out"
             >
               <div className="absolute inset-0 w-full h-full bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
               <span className="mr-3 tracking-wide">{HERO_CONTENT.cta}</span>
-            </a>
+            </Link>
           </motion.div>
 
         </div>
