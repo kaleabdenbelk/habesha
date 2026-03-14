@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.2",
@@ -18,9 +19,6 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "ws": "^8.19.0"
-  },
-  "scripts": {
-    "postinstall": "prisma generate"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
