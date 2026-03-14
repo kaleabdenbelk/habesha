@@ -102,7 +102,7 @@ export default function HeroCanvas({ scrollYProgress }: HeroCanvasProps) {
         className="w-full h-full block"
         role="img"
         style={{ width: '100vw', height: '100vh' }}
-        aria-label="AquaNova Yacht moving through the water"
+        aria-label="Habeshaprogeny"
       />
       {/* Fallback pattern/gradient while loading to prevent empty block */}
       {imagesLoaded === 0 && (

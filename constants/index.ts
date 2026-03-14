@@ -1,6 +1,7 @@
 export const SITE_METADATA = {
-  title: "AquaNova | Your voyage, reimagined",
-  description: "Discover the future of cruising with AquaNova. Hybrid-electric catamaran, AI energy orchestration, and zero-odour journeys.",
+  title: "HabeshaProgeny | Build Skills. Build Startups. Build Impact.",
+  description:
+    "HabeshaProgeny is a builder community helping Africans gain real-world experience, collaborate on startups, and develop meaningful projects through mentorship, events, and the Inner Circle.",
 };
 
 export const NAV_LINKS = [
@@ -183,7 +184,7 @@ export const FOOTER_CONTENT = {
   statusValue: "Optimal",
   statusLatency: "Transmission latency: 24ms",
   statusCount: "Active Progeny: 1,248",
-  copyright: "© 2026 AQUANOVA × HABESHAPROGENY. ALL RIGHTS RESERVED.",
+  copyright: "© 2026  HABESHAPROGENY. ALL RIGHTS RESERVED.",
   scrollToTop: "TRANSMIT TO TOP",
   navLinks: [
     { name: "Scrollytelling", href: "#" },
