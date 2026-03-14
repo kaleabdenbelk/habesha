@@ -3,6 +3,8 @@ import Hero from "@/components/Hero";
 import WhatWeDo from "@/components/WhatWeDo";
 import ProjectShowcase from "@/components/ProjectShowcase";
 import BlogSection from "@/components/BlogSection";
+import ContactHub from "@/components/ContactHub";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -21,12 +23,11 @@ export default function Home() {
       {/* Blog Section */}
       <BlogSection />
       
-      <section id="contact" className="relative w-full h-[50vh] flex flex-col items-center justify-center bg-black border-t border-white/5 z-20">
-        <h2 className="text-3xl md:text-5xl font-outfit font-bold text-white mb-4">
-          Contact Us
-        </h2>
-        <p className="text-gray-400 font-outfit">Request info form goes here.</p>
-      </section>
+      {/* Contact Hub Section */}
+      <ContactHub />
+
+      {/* Footer Section */}
+      <Footer />
     </main>
   );
 }

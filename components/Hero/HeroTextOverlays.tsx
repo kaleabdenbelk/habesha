@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, MotionValue, useTransform } from "framer-motion";
+import { HERO_CONTENT } from "@/constants";
 
 interface HeroTextOverlaysProps {
   scrollYProgress: MotionValue<number>;
@@ -40,9 +41,9 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
           {/* Top Left: Headline */}
           <motion.div style={{ opacity: opacityTL, y: yTL }} className="pointer-events-auto max-w-xl md:max-w-2xl absolute top-24 left-6 md:left-12 lg:left-24">
             <h1 className="font-outfit text-5xl md:text-7xl font-extrabold leading-tight tracking-tight text-white drop-shadow-2xl">
-              HabeshaProgeny<br />
+              {HERO_CONTENT.brand.first}<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5FF]">
-                Transforming Students Into Problem-Solvers
+                {HERO_CONTENT.brand.tagline}
               </span>
             </h1>
           </motion.div>
@@ -50,9 +51,9 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
           {/* Top Right: Subheadline */}
           <motion.div style={{ opacity: opacityTR, y: yTR }} className="pointer-events-auto max-w-sm md:text-right absolute top-24 right-6 md:right-12 lg:right-24">
             <h2 className="font-outfit text-xl md:text-2xl font-semibold text-gray-200 drop-shadow-xl leading-relaxed">
-              Tech · Finance · Marketing · Creative<br/>
-              <span className="text-[#00E5FF]">·</span> Real-world Experience<br/>
-              <span className="text-[#00E5FF]">·</span> Building Impactful Projects
+              {HERO_CONTENT.subheadline.sectors}<br/>
+              <span className="text-[#00E5FF]">·</span> {HERO_CONTENT.subheadline.experience}<br/>
+              <span className="text-[#00E5FF]">·</span> {HERO_CONTENT.subheadline.impact}
             </h2>
           </motion.div>
 
@@ -60,12 +61,12 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
 
         {/* MIDDLE ROW: About Us */}
         <div className="absolute inset-0 flex items-center justify-center p-6 md:p-12">
-           <motion.div style={{ opacity: opacityAbout, y: yAbout }} className="pointer-events-auto max-w-3xl text-center">
+           <motion.div id="about" style={{ opacity: opacityAbout, y: yAbout }} className="pointer-events-auto max-w-3xl text-center">
             <h3 className="font-outfit text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl">
-              About Us
+              {HERO_CONTENT.about.title}
             </h3>
             <p className="font-outfit text-xl md:text-2xl text-gray-200 leading-relaxed drop-shadow-lg">
-              We are a collective of driven students dedicated to bridging the gap between theoretical learning and practical innovation. At HabeshaProgeny, we collaborate on real-world projects that ignite our passions and make a tangible impact across tech, finance, and creative industries.
+              {HERO_CONTENT.about.description}
             </p>
           </motion.div>
         </div>
@@ -76,7 +77,7 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
           {/* Bottom Left: Microcopy */}
           <motion.div style={{ opacity: opacityBL, x: xBL }} className="pointer-events-auto max-w-md">
             <p className="font-outfit text-lg md:text-xl text-gray-300 font-medium drop-shadow-lg leading-snug">
-              Join HabeshaProgeny to grow your skills, collaborate with others, and create solutions that matter.
+              {HERO_CONTENT.microcopy}
             </p>
           </motion.div>
 
@@ -87,7 +88,7 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
               className="group relative inline-flex items-center justify-center px-8 py-4 text-base md:text-lg font-bold text-[#001827] bg-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.8)] rounded-none overflow-hidden transition-all duration-300 ease-out"
             >
               <div className="absolute inset-0 w-full h-full bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-              <span className="mr-3 tracking-wide">Join the Progeny →</span>
+              <span className="mr-3 tracking-wide">{HERO_CONTENT.cta}</span>
             </a>
           </motion.div>
 

@@ -2,31 +2,32 @@
 
 import { motion, Variants } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-
 const blogPosts = [
   {
     id: 1,
-    category: "Insights",
-    date: "March 12, 2026",
-    title: "The Zero-Emission Future of Luxury Yachting",
-    excerpt: "Exploring the integration of solid-state batteries and AI-driven energy orchestration in modern catamarans.",
+    category: "Future of Work",
+    date: "March 14, 2026",
+    title: "Will AI Replace Jobs in Ethiopia — or Create New Ones?",
+    excerpt:
+      "Artificial intelligence is transforming industries across the world. For Ethiopia's young workforce, the question is no longer if AI will arrive, but how we adapt, build new skills, and shape the opportunities it creates.",
   },
   {
     id: 2,
-    category: "Innovation",
-    date: "March 08, 2026",
-    title: "AI as the New Navigator: Beyond Autopilot",
-    excerpt: "How predictive neural networks are redefining safety and comfort on the high seas.",
+    category: "AI & Technology",
+    date: "March 10, 2026",
+    title: "Why AI Literacy Might Be the Most Important Skill for the Next Generation",
+    excerpt:
+      "Coding is powerful, but understanding how AI works may become just as important. From business to marketing to engineering, AI literacy will define the builders of the next decade.",
   },
   {
     id: 3,
-    category: "Design",
-    date: "March 01, 2026",
-    title: "Minimalism Meets Maritime: The Aura UI Philosophy",
-    excerpt: "Designing digital cockpits that disappear into the aesthetic fabric of luxury interiors.",
+    category: "Startups",
+    date: "March 05, 2026",
+    title: "Why Ethiopia Needs Builders, Not Just Job Seekers",
+    excerpt:
+      "For decades, success meant finding a job. But the future belongs to those who create them. Ethiopia's young innovators have the opportunity to build startups, solve real problems, and shape the country's economic future.",
   },
 ];
-
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {

@@ -2,14 +2,16 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 
+import { SITE_METADATA } from "@/constants";
+
 const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "AquaNova | Your voyage, reimagined",
-  description: "Discover the future of cruising with AquaNova. Hybrid-electric catamaran, AI energy orchestration, and zero-odour journeys.",
+  title: SITE_METADATA.title,
+  description: SITE_METADATA.description,
 };
 
 export default function RootLayout({

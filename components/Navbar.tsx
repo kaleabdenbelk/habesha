@@ -2,18 +2,13 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Music, VolumeX } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { NAV_LINKS, FOOTER_CONTENT, NAVBAR_CONTENT } from "@/constants";
+import Image from "next/image";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isAudioSupported, setIsAudioSupported] = useState(true);
-  const audioRef = useRef<HTMLAudioElement | null>(null);
-  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // Requirement: Music file path is just spaces or empty if unprovided. Let's use an empty string that won't break 
-  // or a placeholder that represents the user's intent:
-  const MUSIC_FILE_PATH = "  ";
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,157 +18,122 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Only initialize Audio if there's a valid path. If "  ", it might throw unhandled rejections.
-    // For safety with empty path placeholder required by instructions:
-    const audioUrl = MUSIC_FILE_PATH.trim() ? MUSIC_FILE_PATH : "/audio/bg-music.mp3"; 
-    
-    try {
-      audioRef.current = new Audio(audioUrl);
-      audioRef.current.loop = true;
-      audioRef.current.volume = 0; // Start muted for soft fade in
-    } catch (err) {
-      console.warn("Audio not supported or invalid path.", err);
-      setIsAudioSupported(false);
-      return;
-    }
-
-    const startAudio = async () => {
-      try {
-        await audioRef.current?.play();
-        setIsPlaying(true);
-        fadeInAudio();
-      } catch (err) {
-        // Autoplay is blocked unless the user interacts first
-        console.log("Autoplay blocked. User interaction required.");
-      }
-    };
-
-    startAudio();
-
-    // Cleanup: completely stop music and clear refs on unmount
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.src = "";
-        audioRef.current = null;
-      }
-      if (fadeIntervalRef.current) {
-        clearInterval(fadeIntervalRef.current);
-      }
-    };
-  }, []);
-
-  const fadeInAudio = () => {
-    if (!audioRef.current) return;
-    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
-    
-    fadeIntervalRef.current = setInterval(() => {
-      if (audioRef.current && audioRef.current.volume < 0.2) { // 0.2 for "softly"
-        audioRef.current.volume = Math.min(0.2, audioRef.current.volume + 0.05);
-      } else {
-        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
-      }
-    }, 200);
-  };
-
-  const fadeOutAudio = () => {
-    if (!audioRef.current) return;
-    if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
-    
-    fadeIntervalRef.current = setInterval(() => {
-      if (audioRef.current && audioRef.current.volume > 0) {
-        audioRef.current.volume = Math.max(0, audioRef.current.volume - 0.05);
-      } else {
-        audioRef.current?.pause();
-        if (fadeIntervalRef.current) clearInterval(fadeIntervalRef.current);
-      }
-    }, 200);
-  };
-
-  const togglePlay = () => {
-    if (!audioRef.current) return;
-    
-    if (isPlaying) {
-      setIsPlaying(false);
-      fadeOutAudio();
-    } else {
-      audioRef.current.play().then(() => {
-        setIsPlaying(true);
-        fadeInAudio();
-      }).catch(console.error);
-    }
-  };
-
   return (
-    <motion.nav 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled 
-          ? "bg-[#001827]/80 backdrop-blur-md border-b border-[#00E5FF]/10 shadow-lg shadow-black/50" 
-          : "bg-transparent"
-      }`}
-    >
-      <div className="max-w-[1440px] mx-auto px-6 h-24 flex items-center justify-between">
-        {/* Brand Logo Wordmark */}
-        <div className="text-3xl font-extrabold tracking-widest uppercase bg-clip-text text-transparent bg-gradient-to-br from-white to-[#00E5FF] drop-shadow-md">
-          AquaNova
+    <div className="fixed top-0 left-0 w-full z-[100] px-6 py-6 pointer-events-none">
+      <motion.nav 
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+        className={`mx-auto flex items-center justify-between transition-all duration-500 pointer-events-auto
+          ${isScrolled 
+            ? "max-w-[700px] bg-black/40 backdrop-blur-xl border border-white/10 px-6 py-3 rounded-full shadow-[0_10px_40px_rgba(0,0,0,0.4)]" 
+            : "max-w-[1440px] bg-transparent border-transparent px-0 py-4 rounded-none"
+          }
+        `}
+      >
+        {/* Brand */}
+        <div className={`font-extrabold tracking-tighter uppercase font-outfit transition-all duration-500
+          ${isScrolled ? "text-xl text-white" : "text-3xl text-white"}
+        `}>
+          <Image src="/logoo.png" alt="Logo" width={30} height={30} />
         </div>
-        
-        <div className="flex items-center gap-6">
-          {isAudioSupported && (
-            <motion.button
-              onClick={togglePlay}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label={isPlaying ? "Pause background music" : "Play background music"}
-              className="relative flex items-center justify-center w-12 h-12 rounded-full border border-white/20 text-[#00E5FF] transition-colors group z-10 hover:bg-[#00E5FF]/10"
-            >
-              {isPlaying && (
-                <motion.div 
-                  className="absolute inset-0 rounded-full bg-[#00E5FF] mix-blend-screen"
-                  animate={{ scale: [1, 1.4, 1], opacity: [0.3, 0, 0.3] }}
-                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                />
-              )}
-              <AnimatePresence mode="wait">
-                {isPlaying ? (
-                  <motion.div
-                    key="playing"
-                    initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <Music className="w-5 h-5 drop-shadow-[0_0_8px_rgba(0,229,255,0.8)]" />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    key="paused"
-                    initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
-                    animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                    exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
-                    transition={{ duration: 0.2 }}
-                    className="opacity-50"
-                  >
-                    <VolumeX className="w-5 h-5" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.button>
-          )}
 
-          <a 
-            href="#contact" 
-            className="hidden md:flex relative items-center justify-center px-6 py-2.5 rounded-full text-sm font-semibold tracking-wide text-white bg-white/5 hover:bg-white/10 border border-white/20 transition-all duration-300 group"
-          >
-            Request Info
-            <span className="absolute inset-0 rounded-full flex items-center justify-center pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-r from-transparent via-[#00E5FF]/20 to-transparent animate-pulse" />
-          </a>
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-8">
+          {NAV_LINKS.map((link) => (
+            <a 
+              key={link.name} 
+              href={link.href}
+              className="group relative text-xs font-bold uppercase tracking-widest text-gray-400 hover:text-white transition-colors"
+            >
+              {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#00E5FF] transition-all duration-300 group-hover:w-full" />
+            </a>
+          ))}
         </div>
-      </div>
-    </motion.nav>
+
+        <div className="flex items-center gap-4">
+          
+
+          {/* Request Info CTA (Only visible when scrolled or on desktop) */}
+          <motion.a 
+            href="#contact"
+            className={`hidden lg:flex items-center justify-center font-bold tracking-widest text-[10px] uppercase rounded-full transition-all duration-500
+              ${isScrolled 
+                ? "px-4 py-2 bg-[#00E5FF] text-black shadow-[0_0_20px_rgba(0,229,255,0.4)]" 
+                : "px-6 py-3 bg-white/10 text-white border border-white/10 hover:bg-white/20"
+              }
+            `}
+          >
+            {NAVBAR_CONTENT.cta}
+          </motion.a>
+
+          {/* Mobile Menu Toggle */}
+          <button 
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden flex items-center justify-center w-10 h-10 text-white"
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
+      </motion.nav>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden absolute top-24 left-6 right-6 bg-black/90 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 z-[101] pointer-events-auto shadow-2xl"
+          >
+            <div className="flex flex-col gap-6">
+              {NAV_LINKS.map((link, idx) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: idx * 0.1 }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-2xl font-bold uppercase tracking-tight text-white flex items-center justify-between group"
+                >
+                  {link.name}
+                  <ArrowUpRight className="w-5 h-5 text-gray-600 group-hover:text-[#00E5FF] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
+                </motion.a>
+              ))}
+              <div className="pt-6 border-t border-white/5">
+                <a 
+                  href="#contact" 
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full text-center py-4 bg-[#00E5FF] text-black rounded-xl font-bold tracking-widest text-sm"
+                >
+                  {NAVBAR_CONTENT.mobileCta}
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 }
+
+function ArrowUpRight({ className }: { className?: string }) {
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth="2" 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={className}
+    >
+      <line x1="7" y1="17" x2="17" y2="7"></line>
+      <polyline points="7 7 17 7 17 17"></polyline>
+    </svg>
+  );
+}
+

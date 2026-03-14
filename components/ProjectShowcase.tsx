@@ -2,46 +2,9 @@
 
 import { motion, Variants } from "framer-motion";
 import { useState } from "react";
-import Image from "next/image";
+import { PROJECTS_CONTENT } from "@/constants";
 
-const projects = [
-  {
-    id: 1,
-    title: "AI Fleet Orchestrator",
-    category: "Technical Innovation",
-    description: "Quantum-ready routing for autonomous maritime assets, ensuring zero-collision pathways and peak energy efficiency.",
-    image: "/images/bg-hero.jpg", // Using existing placeholder if possible, or reliable fallbacks
-    accent: "#00E5FF",
-    size: "large", // Bento grid sizing
-  },
-  {
-    id: 2,
-    title: "EcoMarine Tokenomics",
-    category: "Strategic Growth",
-    description: "Decentralized carbon-credit platform for luxury maritime voyages.",
-    image: "/images/bg-hero.jpg",
-    accent: "#005f73",
-    size: "small",
-  },
-  {
-    id: 3,
-    title: "Aura UI Design System",
-    category: "Creative Excellence",
-    description: "Multi-sensory interface architecture for high-end digital cockpits.",
-    image: "/images/bg-hero.jpg",
-    accent: "#ffffff",
-    size: "small",
-  },
-  {
-    id: 4,
-    title: "AquaNova Sales Experience",
-    category: "Strategic Growth",
-    description: "Immersive VR configurator for next-gen hybrid catamaran customization.",
-    image: "/images/bg-hero.jpg",
-    accent: "#00E5FF",
-    size: "medium",
-  },
-];
+const projects = PROJECTS_CONTENT.projects;
 
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -69,7 +32,7 @@ export default function ProjectShowcase() {
   const [hoveredId, setHoveredId] = useState<number | null>(null);
 
   return (
-    <section className="relative w-full min-h-screen bg-black py-24 md:py-32 px-6 overflow-hidden">
+    <section id="projects" className="relative w-full min-h-screen bg-black py-24 md:py-32 px-6 overflow-hidden">
       {/* Background radial glow */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-[#00E5FF]/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-[#005f73]/5 rounded-full blur-[120px] pointer-events-none" />
@@ -83,7 +46,7 @@ export default function ProjectShowcase() {
             transition={{ duration: 0.6 }}
             className="text-[#00E5FF] font-outfit font-bold uppercase tracking-widest text-sm mb-4 block"
           >
-            Capabilities in Action
+            {PROJECTS_CONTENT.tagline}
           </motion.span>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -91,7 +54,7 @@ export default function ProjectShowcase() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="font-outfit text-4xl md:text-6xl font-extrabold text-white leading-tight"
           >
-            Progeny <span className="text-gray-500 italic">Projects.</span>
+            {PROJECTS_CONTENT.titlePrefix} <span className="text-gray-500 italic">{PROJECTS_CONTENT.titleItalic}</span>
           </motion.h2>
         </div>
 
@@ -147,7 +110,7 @@ export default function ProjectShowcase() {
                 {/* Interactive button (appearing on hover) */}
                 <div className="mt-6 opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0">
                    <div className="inline-flex items-center text-white font-bold text-sm tracking-widest gap-2">
-                     VIEW CASE STUDY
+                     {PROJECTS_CONTENT.cta}
                      <div className="w-8 h-[1px] bg-[#00E5FF]" />
                    </div>
                 </div>
