@@ -1,5 +1,8 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import WhatWeDo from "@/components/WhatWeDo";
+import ProjectShowcase from "@/components/ProjectShowcase";
+import BlogSection from "@/components/BlogSection";
 
 export default function Home() {
   return (
@@ -9,16 +12,14 @@ export default function Home() {
       {/* Hero Section */}
       <Hero />
       
-      {/* Placeholder sections to allow scrolling and testing animations */}
-      <section id="modes" className="relative w-full h-screen flex flex-col items-center justify-center bg-[#001827] border-t border-white/10 z-20">
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-transparent pointer-events-none" />
-        <h2 className="text-4xl md:text-6xl font-outfit font-bold text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5FF] drop-shadow-lg z-10">
-          Discover Modes
-        </h2>
-        <p className="mt-6 text-gray-300 font-outfit text-lg max-w-xl text-center z-10">
-          This is a placeholder section to demonstrate the scrollytelling transition and that the page continues past the 500vh hero component.
-        </p>
-      </section>
+      {/* What We Do Scrollytelling Section */}
+      <WhatWeDo />
+
+      {/* Project Showcase Section */}
+      <ProjectShowcase />
+
+      {/* Blog Section */}
+      <BlogSection />
       
       <section id="contact" className="relative w-full h-[50vh] flex flex-col items-center justify-center bg-black border-t border-white/5 z-20">
         <h2 className="text-3xl md:text-5xl font-outfit font-bold text-white mb-4">
