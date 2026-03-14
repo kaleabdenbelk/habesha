@@ -7,19 +7,23 @@ interface HeroTextOverlaysProps {
 }
 
 export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysProps) {
-  // TOP LEFT: Headline (fades out smoothly)
-  const opacityTL = useTransform(scrollYProgress, [0, 0.2, 0.85, 0.95], [1, 1, 0, 0]);
-  const yTL = useTransform(scrollYProgress, [0, 0.2], [0, -30]);
+  // TOP LEFT: Headline (fades out much earlier now)
+  const opacityTL = useTransform(scrollYProgress, [0, 0.15, 0.25, 0.35], [1, 1, 0, 0]);
+  const yTL = useTransform(scrollYProgress, [0, 0.15], [0, -30]);
 
   // TOP RIGHT: Subheadline
-  const opacityTR = useTransform(scrollYProgress, [0.1, 0.25, 0.85, 0.95], [0, 1, 0, 0]);
-  const yTR = useTransform(scrollYProgress, [0.1, 0.25], [30, 0]);
+  const opacityTR = useTransform(scrollYProgress, [0.05, 0.15, 0.25, 0.35], [0, 1, 0, 0]);
+  const yTR = useTransform(scrollYProgress, [0.05, 0.15], [30, 0]);
 
   // BOTTOM LEFT: Microcopy
-  const opacityBL = useTransform(scrollYProgress, [0.3, 0.45, 0.85, 0.95], [0, 1, 0, 0]);
-  const xBL = useTransform(scrollYProgress, [0.3, 0.45], [-30, 0]);
+  const opacityBL = useTransform(scrollYProgress, [0.1, 0.20, 0.25, 0.35], [0, 1, 0, 0]);
+  const xBL = useTransform(scrollYProgress, [0.1, 0.20], [-30, 0]);
 
-  // BOTTOM RIGHT: CTA
+  // ABOUT US TEXT (Appears near the end, concurrently with CTA)
+  const opacityAbout = useTransform(scrollYProgress, [0.5, 0.65, 0.95, 1], [0, 1, 1, 0]);
+  const yAbout = useTransform(scrollYProgress, [0.5, 0.65], [30, 0]);
+
+  // BOTTOM RIGHT: CTA (Appears near the end)
   const opacityBR = useTransform(scrollYProgress, [0.55, 0.7, 0.95, 1], [0, 1, 1, 0]);
   const scaleBR = useTransform(scrollYProgress, [0.55, 0.7, 0.95, 1], [0.8, 1, 0.95, 0.9]);
 
@@ -34,7 +38,7 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
         <div className="flex flex-col md:flex-row justify-between items-start gap-8 mt-24">
           
           {/* Top Left: Headline */}
-          <motion.div style={{ opacity: opacityTL, y: yTL }} className="pointer-events-auto max-w-xl md:max-w-2xl">
+          <motion.div style={{ opacity: opacityTL, y: yTL }} className="pointer-events-auto max-w-xl md:max-w-2xl absolute top-24 left-6 md:left-12 lg:left-24">
             <h1 className="font-outfit text-5xl md:text-7xl font-extrabold leading-tight tracking-tight text-white drop-shadow-2xl">
               HabeshaProgeny<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-[#00E5FF]">
@@ -44,7 +48,7 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
           </motion.div>
 
           {/* Top Right: Subheadline */}
-          <motion.div style={{ opacity: opacityTR, y: yTR }} className="pointer-events-auto max-w-sm md:text-right">
+          <motion.div style={{ opacity: opacityTR, y: yTR }} className="pointer-events-auto max-w-sm md:text-right absolute top-24 right-6 md:right-12 lg:right-24">
             <h2 className="font-outfit text-xl md:text-2xl font-semibold text-gray-200 drop-shadow-xl leading-relaxed">
               Tech · Finance · Marketing · Creative<br/>
               <span className="text-[#00E5FF]">·</span> Real-world Experience<br/>
@@ -54,8 +58,20 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
 
         </div>
 
+        {/* MIDDLE ROW: About Us */}
+        <div className="absolute inset-0 flex items-center justify-center p-6 md:p-12">
+           <motion.div style={{ opacity: opacityAbout, y: yAbout }} className="pointer-events-auto max-w-3xl text-center">
+            <h3 className="font-outfit text-4xl md:text-5xl font-bold text-white mb-6 drop-shadow-xl">
+              About Us
+            </h3>
+            <p className="font-outfit text-xl md:text-2xl text-gray-200 leading-relaxed drop-shadow-lg">
+              We are a collective of driven students dedicated to bridging the gap between theoretical learning and practical innovation. At HabeshaProgeny, we collaborate on real-world projects that ignite our passions and make a tangible impact across tech, finance, and creative industries.
+            </p>
+          </motion.div>
+        </div>
+
         {/* BOTTOM ROW */}
-        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-8 md:mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-end gap-8 mb-8 md:mb-12 absolute bottom-12 left-6 right-6 md:left-12 md:right-12 lg:left-24 lg:right-24">
           
           {/* Bottom Left: Microcopy */}
           <motion.div style={{ opacity: opacityBL, x: xBL }} className="pointer-events-auto max-w-md">
@@ -65,7 +81,7 @@ export default function HeroTextOverlays({ scrollYProgress }: HeroTextOverlaysPr
           </motion.div>
 
           {/* Bottom Right: Primary CTA */}
-          <motion.div style={{ opacity: opacityBR, scale: scaleBR }} className="pointer-events-auto flex justify-end">
+          <motion.div style={{ opacity: opacityBR, scale: scaleBR }} className="pointer-events-auto flex justify-end ml-auto">
             <a 
               href="#about"
               className="group relative inline-flex items-center justify-center px-8 py-4 text-base md:text-lg font-bold text-[#001827] bg-[#00E5FF] shadow-[0_0_20px_rgba(0,229,255,0.4)] hover:shadow-[0_0_30px_rgba(0,229,255,0.8)] rounded-none overflow-hidden transition-all duration-300 ease-out"
