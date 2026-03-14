@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Send, Terminal, Cpu, Globe, Zap } from "lucide-react";
 import { CONTACT_CONTENT } from "@/constants";
+import { submitContact } from "@/app/actions";
 
 const intents = [
   { id: "tech", label: CONTACT_CONTENT.intents[0].label, icon: Cpu },
@@ -14,12 +15,29 @@ const intents = [
 export default function ContactHub() {
   const [selectedIntent, setSelectedIntent] = useState("tech");
   const [isTransmitting, setIsTransmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsTransmitting(true);
-    // Simulate transmission
-    setTimeout(() => setIsTransmitting(false), 3000);
+    
+    const result = await submitContact({
+      ...formData,
+      intent: selectedIntent,
+    });
+
+    if (result.success) {
+      setFormData({ name: "", email: "", message: "" });
+      // In a real app we might show a success toast here
+    } else {
+      alert(result.error);
+    }
+    
+    setIsTransmitting(false);
   };
 
   return (
@@ -107,6 +125,8 @@ export default function ContactHub() {
                   <input
                     type="text"
                     required
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder={CONTACT_CONTENT.form.namePlaceholder}
                     className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white font-outfit focus:outline-none focus:border-[#57ff8f] focus:ring-1 focus:ring-[#57ff8f]/30 transition-all placeholder:text-gray-700"
                   />
@@ -120,6 +140,8 @@ export default function ContactHub() {
                   <input
                     type="email"
                     required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder={CONTACT_CONTENT.form.emailPlaceholder}
                     className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white font-outfit focus:outline-none focus:border-[#57ff8f] focus:ring-1 focus:ring-[#57ff8f]/30 transition-all placeholder:text-gray-700"
                   />
@@ -132,6 +154,8 @@ export default function ContactHub() {
                 <textarea
                   required
                   rows={4}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder={CONTACT_CONTENT.form.messagePlaceholder}
                   className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-4 text-white font-outfit focus:outline-none focus:border-[#57ff8f] focus:ring-1 focus:ring-[#57ff8f]/30 transition-all placeholder:text-gray-700 resize-none"
                 />

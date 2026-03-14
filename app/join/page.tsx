@@ -5,6 +5,7 @@ import { useState } from "react";
 import { ChevronRight, ArrowLeft, CheckCircle2, Terminal, Send, Cpu, Globe, Zap, Sparkles, Check } from "lucide-react";
 import Link from "next/link";
 import { INNER_CIRCLE_CONTENT, INNER_CIRCLE_FORM } from "@/constants";
+import { submitJoin } from "@/app/actions";
 
 export default function JoinPage() {
   const [formData, setFormData] = useState({
@@ -15,16 +16,24 @@ export default function JoinPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.commit || !formData.specialization) return;
 
     setIsSubmitting(true);
-    // Simulate API transmission
-    setTimeout(() => {
-      setIsSubmitting(false);
+    
+    const result = await submitJoin({
+      email: formData.email,
+      specialization: formData.specialization,
+    });
+
+    if (result.success) {
       setIsSuccess(true);
-    }, 2000);
+    } else {
+      alert(result.error);
+    }
+    
+    setIsSubmitting(false);
   };
 
   return (
